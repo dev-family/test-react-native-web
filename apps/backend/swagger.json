@@ -1,0 +1,2333 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "api",
+    "version": "1.0.0",
+    "description": ""
+  },
+  "components": {
+    "responses": {
+      "Forbidden": {
+        "description": "Access token is missing or invalid"
+      },
+      "Accepted": {
+        "description": "The request was accepted"
+      },
+      "Created": {
+        "description": "The resource has been created"
+      },
+      "NotFound": {
+        "description": "The resource has been created"
+      },
+      "NotAcceptable": {
+        "description": "The resource has been created"
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "BasicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      }
+    },
+    "schemas": {
+      "Any": {
+        "description": "Any JSON object not defined as schema"
+      },
+      "PaginationMeta": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "example": 100,
+            "nullable": false
+          },
+          "page": {
+            "type": "number",
+            "example": 2,
+            "nullable": false
+          },
+          "perPage": {
+            "type": "number",
+            "example": 10,
+            "nullable": false
+          },
+          "currentPage": {
+            "type": "number",
+            "example": 3,
+            "nullable": false
+          },
+          "lastPage": {
+            "type": "number",
+            "example": 10,
+            "nullable": false
+          },
+          "firstPage": {
+            "type": "number",
+            "example": 1,
+            "nullable": false
+          },
+          "lastPageUrl": {
+            "type": "string",
+            "example": "/?page=10",
+            "nullable": false
+          },
+          "firstPageUrl": {
+            "type": "string",
+            "example": "/?page=1",
+            "nullable": false
+          },
+          "nextPageUrl": {
+            "type": "string",
+            "example": "/?page=6",
+            "nullable": false
+          },
+          "previousPageUrl": {
+            "type": "string",
+            "example": "/?page=5",
+            "nullable": false
+          }
+        }
+      },
+      "CommentInterface": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false,
+            "example": 134
+          },
+          "postId": {
+            "type": "number",
+            "nullable": false,
+            "example": 206
+          },
+          "user": {
+            "type": "UserInterface",
+            "nullable": false,
+            "$ref": "#/components/schemas/UserInterface",
+            "example": null
+          },
+          "comment": {
+            "type": "string",
+            "nullable": false,
+            "example": "Lorem Ipsum"
+          },
+          "createdAt": {
+            "type": "string",
+            "nullable": false,
+            "example": "Lorem Ipsum"
+          },
+          "deletedAt": {
+            "type": "string",
+            "nullable": false,
+            "example": "Lorem Ipsum"
+          },
+          "replyId": {
+            "type": "number",
+            "nullable": true,
+            "example": 775
+          },
+          "repliesAmount": {
+            "type": "number",
+            "nullable": true,
+            "example": 159
+          }
+        },
+        "description": "CommentInterface (Interface)"
+      },
+      "CommentPaginatedInterface": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "CommentInterface",
+              "nullable": false,
+              "$ref": "#/components/schemas/CommentInterface",
+              "example": null
+            }
+          }
+        },
+        "description": "CommentPaginatedInterface (Interface)"
+      },
+      "PostOptionInterface": {
+        "type": "object",
+        "properties": {
+          "option": {
+            "type": "string",
+            "nullable": false,
+            "example": "Lorem Ipsum"
+          },
+          "id": {
+            "type": "number",
+            "nullable": false,
+            "example": 949
+          },
+          "total": {
+            "type": "number",
+            "nullable": false,
+            "example": 917
+          }
+        },
+        "description": "PostOptionInterface (Interface)"
+      },
+      "PostTagInterface": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false,
+            "example": 724
+          },
+          "value": {
+            "type": "string",
+            "nullable": false,
+            "example": "Lorem Ipsum"
+          }
+        },
+        "description": "PostTagInterface (Interface)"
+      },
+      "PostInterface": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false,
+            "example": 336
+          },
+          "title": {
+            "type": "string",
+            "nullable": false,
+            "example": "Lorem Ipsum"
+          },
+          "description": {
+            "type": "string",
+            "nullable": false,
+            "example": "Lorem ipsum dolor sit amet"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "PostOptionInterface",
+              "nullable": false,
+              "$ref": "#/components/schemas/PostOptionInterface",
+              "example": null
+            }
+          },
+          "user": {
+            "type": "UserInterface",
+            "nullable": false,
+            "$ref": "#/components/schemas/UserInterface",
+            "example": null
+          },
+          "total": {
+            "type": "number",
+            "nullable": false,
+            "example": 213
+          },
+          "dislikes": {
+            "type": "array",
+            "items": {
+              "type": "UserPostLike",
+              "nullable": false,
+              "$ref": "#/components/schemas/UserPostLike",
+              "example": null
+            }
+          },
+          "likes": {
+            "type": "array",
+            "items": {
+              "type": "UserPostLike",
+              "nullable": false,
+              "$ref": "#/components/schemas/UserPostLike",
+              "example": null
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "nullable": false,
+            "example": "Lorem Ipsum"
+          },
+          "answer": {
+            "type": "number",
+            "nullable": true,
+            "example": 844
+          },
+          "tag": {
+            "type": "PostTagInterface",
+            "nullable": false,
+            "$ref": "#/components/schemas/PostTagInterface",
+            "example": null
+          },
+          "isLiked": {
+            "type": "boolean",
+            "nullable": true,
+            "example": true
+          }
+        },
+        "description": "PostInterface (Interface)"
+      },
+      "PostsPaginatedInterface": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "PostInterface",
+              "nullable": false,
+              "$ref": "#/components/schemas/PostInterface",
+              "example": null
+            }
+          }
+        },
+        "description": "PostsPaginatedInterface (Interface)"
+      },
+      "UserInterface": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "nullable": false,
+            "example": "Lorem Ipsum"
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true,
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true,
+            "example": "Doe"
+          },
+          "id": {
+            "type": "number",
+            "nullable": false,
+            "example": 538
+          },
+          "email": {
+            "type": "string",
+            "nullable": false,
+            "example": "johndoe@example.com"
+          },
+          "createdAt": {
+            "type": "string",
+            "nullable": false,
+            "format": "date-time",
+            "example": "2021-03-23T16:13:08.489+01:00"
+          },
+          "balance": {
+            "type": "number",
+            "nullable": true,
+            "example": 185
+          }
+        },
+        "description": "UserInterface (Interface)"
+      },
+      "UserResultInterface": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "UserInterface",
+            "nullable": false,
+            "$ref": "#/components/schemas/UserInterface",
+            "example": null
+          },
+          "token": {
+            "type": "string",
+            "nullable": false,
+            "example": "Lorem Ipsum"
+          }
+        },
+        "description": "UserResultInterface (Interface)"
+      },
+      "Post": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "tagId",
+          "description",
+          "userId",
+          "options",
+          "user",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 18
+          },
+          "title": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "tag_id": {
+            "type": "number",
+            "example": 731
+          },
+          "description": {
+            "type": "string",
+            "example": "Lorem ipsum dolor sit amet"
+          },
+          "user_id": {
+            "type": "number",
+            "example": 434
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostOption",
+              "example": "string"
+            }
+          },
+          "tag": {
+            "$ref": "#/components/schemas/PostTag",
+            "example": "string"
+          },
+          "likes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserPostLike",
+              "example": "string"
+            }
+          },
+          "user_options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserPostOption",
+              "example": "string"
+            }
+          },
+          "dislikes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserPostLike",
+              "example": "string"
+            }
+          },
+          "user_reactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserPostLike",
+              "example": "string"
+            }
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "example": "string"
+          },
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserPostComment",
+              "example": "string"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "Post (Model)"
+      },
+      "PostOption": {
+        "type": "object",
+        "required": [
+          "id",
+          "option",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 514
+          },
+          "option": {
+            "type": "string",
+            "example": "string"
+          },
+          "post_id": {
+            "type": "number",
+            "example": 375
+          },
+          "user_options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserPostOption",
+              "example": "string"
+            }
+          },
+          "post": {
+            "$ref": "#/components/schemas/Post",
+            "example": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "PostOption (Model)"
+      },
+      "PostTag": {
+        "type": "object",
+        "required": [
+          "id",
+          "value",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 377
+          },
+          "value": {
+            "type": "string",
+            "example": "string"
+          },
+          "posts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Post",
+              "example": "string"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "PostTag (Model)"
+      },
+      "User": {
+        "type": "object",
+        "required": [
+          "id",
+          "lastName",
+          "email",
+          "username",
+          "password",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "coins": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserCoin",
+              "example": "string"
+            }
+          },
+          "id": {
+            "type": "number",
+            "example": 802
+          },
+          "first_name": {
+            "type": "string",
+            "example": "John"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "johndoe@example.com",
+            "format": "email"
+          },
+          "username": {
+            "type": "string",
+            "example": "string"
+          },
+          "password": {
+            "type": "string",
+            "example": "S3cur3P4s5word!",
+            "format": "password"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "User (Model)"
+      },
+      "UserCoin": {
+        "type": "object",
+        "required": [
+          "userId",
+          "user"
+        ],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 146
+          },
+          "amount": {
+            "type": "number",
+            "example": 884
+          },
+          "user_id": {
+            "type": "number",
+            "example": 448
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "example": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "UserCoin (Model)"
+      },
+      "UserPostComment": {
+        "type": "object",
+        "required": [
+          "id",
+          "userId",
+          "postId",
+          "user",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 601
+          },
+          "user_id": {
+            "type": "number",
+            "example": 445
+          },
+          "reply_id": {
+            "type": "number",
+            "example": 665
+          },
+          "comment": {
+            "type": "string",
+            "example": "string"
+          },
+          "post_id": {
+            "type": "number",
+            "example": 719
+          },
+          "replies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserPostComment",
+              "example": "string"
+            }
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "example": "string"
+          },
+          "post": {
+            "$ref": "#/components/schemas/Post",
+            "example": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "deleted_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "UserPostComment (Model)"
+      },
+      "UserPostLike": {
+        "type": "object",
+        "required": [
+          "id",
+          "like",
+          "postId",
+          "userId",
+          "user",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 557
+          },
+          "like": {
+            "type": "boolean",
+            "example": true
+          },
+          "post_id": {
+            "type": "number",
+            "example": 982
+          },
+          "user_id": {
+            "type": "number",
+            "example": 168
+          },
+          "post": {
+            "$ref": "#/components/schemas/Post",
+            "example": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "example": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "UserPostLike (Model)"
+      },
+      "UserPostOption": {
+        "type": "object",
+        "required": [
+          "id",
+          "optionId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 739
+          },
+          "user_id": {
+            "type": "number",
+            "example": 509
+          },
+          "post_id": {
+            "type": "number",
+            "example": 656
+          },
+          "option_id": {
+            "type": "number",
+            "example": 243
+          },
+          "post_option": {
+            "$ref": "#/components/schemas/PostOption",
+            "example": "string"
+          },
+          "post": {
+            "$ref": "#/components/schemas/Post",
+            "example": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "example": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "example": "2021-03-23T16:13:08.489+01:00",
+            "format": "date-time"
+          }
+        },
+        "description": "UserPostOption (Model)"
+      },
+      "createAccountValidator": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "minLength": 5,
+            "maxLength": 32
+          },
+          "email": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "password": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "minLength": 8,
+            "maxLength": 32
+          }
+        },
+        "example": {
+          "username": "Lorem Ipsum",
+          "email": "Lorem Ipsum",
+          "password": "Lorem Ipsum"
+        },
+        "description": "createAccountValidator (Validator)"
+      },
+      "loginValidator": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "password": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          }
+        },
+        "example": {
+          "username": "Lorem Ipsum",
+          "password": "Lorem Ipsum"
+        },
+        "description": "loginValidator (Validator)"
+      },
+      "createPostReactionValidator": {
+        "type": "object",
+        "properties": {
+          "like": {
+            "type": "boolean",
+            "example": true
+          }
+        },
+        "example": {
+          "like": true
+        },
+        "description": "createPostReactionValidator (Validator)"
+      },
+      "createPostTagValidator": {
+        "type": "object",
+        "properties": {
+          "tag": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "minLength": 2
+          }
+        },
+        "example": {
+          "tag": "Lorem Ipsum"
+        },
+        "description": "createPostTagValidator (Validator)"
+      },
+      "createPostValidator": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "example": 969
+            },
+            "properties": {
+              "items": {
+                "type": "string",
+                "example": "Lorem Ipsum"
+              }
+            }
+          },
+          "tagId": {
+            "type": "number",
+            "example": 706
+          }
+        },
+        "example": {
+          "title": "Lorem Ipsum",
+          "description": "Lorem Ipsum",
+          "options": [
+            "Lorem Ipsum"
+          ],
+          "tagId": 706
+        },
+        "description": "createPostValidator (Validator)"
+      },
+      "createPostVoteValidator": {
+        "type": "object",
+        "properties": {
+          "optionId": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          }
+        },
+        "example": {
+          "optionId": "Lorem Ipsum"
+        },
+        "description": "createPostVoteValidator (Validator)"
+      },
+      "updateUserValidator": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "maxLength": 32
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "maxLength": 32
+          },
+          "email": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "username": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "minLength": 5,
+            "maxLength": 32
+          }
+        },
+        "example": {
+          "firstName": "Lorem Ipsum",
+          "lastName": "Lorem Ipsum",
+          "email": "Lorem Ipsum",
+          "username": "Lorem Ipsum"
+        },
+        "description": "updateUserValidator (Validator)"
+      },
+      "createPostCommentValidator": {
+        "type": "object",
+        "properties": {
+          "comment": {
+            "type": "string",
+            "example": "Lorem Ipsum",
+            "maxLength": 300
+          }
+        },
+        "example": {
+          "comment": "Lorem Ipsum"
+        },
+        "description": "createPostCommentValidator (Validator)"
+      }
+    }
+  },
+  "paths": {
+    "/api/posts": {
+      "get": {
+        "summary": "Get a list of posts (index)",
+        "description": "Returns **200** (OK) as **application/json**\n\n _app/controllers/api/posts_controller.ts_ - **index**",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "tagId",
+            "description": "Tag to filter by",
+            "schema": {
+              "example": "string",
+              "type": "string"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Pagination",
+            "schema": {
+              "example": "string",
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "tags": [
+          "POSTS"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostsPaginatedInterface"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": 336,
+                      "title": "Lorem Ipsum",
+                      "description": "Lorem ipsum dolor sit amet",
+                      "total": 213,
+                      "createdAt": "Lorem Ipsum",
+                      "answer": 844,
+                      "isLiked": true
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "summary": " (store)",
+        "description": "\n\n _app/controllers/api/posts_controller.ts_ - **store**",
+        "parameters": [],
+        "tags": [
+          "POSTS"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostInterface"
+                },
+                "example": {
+                  "id": 336,
+                  "title": "Lorem Ipsum",
+                  "description": "Lorem ipsum dolor sit amet",
+                  "options": [
+                    {
+                      "option": "Lorem Ipsum",
+                      "id": 949,
+                      "total": 917
+                    }
+                  ],
+                  "user": {
+                    "username": "Lorem Ipsum",
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "id": 538,
+                    "email": "johndoe@example.com",
+                    "createdAt": "2021-03-23T16:13:08.489+01:00",
+                    "balance": 185
+                  },
+                  "total": 213,
+                  "createdAt": "Lorem Ipsum",
+                  "answer": 844,
+                  "tag": {
+                    "id": 724,
+                    "value": "Lorem Ipsum"
+                  },
+                  "isLiked": true
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createPostValidator"
+              },
+              "example": {
+                "title": "Lorem Ipsum",
+                "description": "Lorem Ipsum",
+                "options": [
+                  "Lorem Ipsum"
+                ],
+                "tagId": 706
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/posts/create": {
+      "get": {
+        "summary": " (create)",
+        "description": "\n\n _app/controllers/api/posts_controller.ts_ - **create**",
+        "parameters": [],
+        "tags": [
+          "POSTS"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/posts/{id}": {
+      "get": {
+        "summary": "Get a single instance of posts (show)",
+        "description": "Returns **200** (OK) as **application/json**\n\n _app/controllers/api/posts_controller.ts_ - **show**",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "POSTS"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostInterface"
+                },
+                "example": {
+                  "id": 336,
+                  "title": "Lorem Ipsum",
+                  "description": "Lorem ipsum dolor sit amet",
+                  "options": [
+                    {
+                      "option": "Lorem Ipsum",
+                      "id": 949,
+                      "total": 917
+                    }
+                  ],
+                  "user": {
+                    "username": "Lorem Ipsum",
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "id": 538,
+                    "email": "johndoe@example.com",
+                    "createdAt": "2021-03-23T16:13:08.489+01:00",
+                    "balance": 185
+                  },
+                  "total": 213,
+                  "createdAt": "Lorem Ipsum",
+                  "answer": 844,
+                  "tag": {
+                    "id": 724,
+                    "value": "Lorem Ipsum"
+                  },
+                  "isLiked": true
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update posts (update)",
+        "description": "\n\n _app/controllers/api/posts_controller.ts_ - **update**",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "POSTS"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {}
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete posts (destroy)",
+        "description": "\n\n _app/controllers/api/posts_controller.ts_ - **destroy**",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Post to delete",
+            "schema": {
+              "example": "string",
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "POSTS"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "text/plain": {
+                "example": "{result: string}"
+              }
+            },
+            "description": "Returns **200** (OK) as **text/plain**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/posts/{id}/edit": {
+      "get": {
+        "summary": " (edit)",
+        "description": "\n\n _app/controllers/api/posts_controller.ts_ - **edit**",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "POSTS"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/posts/{postId}/vote": {
+      "post": {
+        "summary": " (vote)",
+        "description": "\n\n _app/controllers/api/posts_controller.ts_ - **vote**",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "description": "Post to vote",
+            "schema": {
+              "example": "string",
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "POSTS"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostInterface"
+                },
+                "example": {
+                  "id": 336,
+                  "title": "Lorem Ipsum",
+                  "description": "Lorem ipsum dolor sit amet",
+                  "options": [
+                    {
+                      "option": "Lorem Ipsum",
+                      "id": 949,
+                      "total": 917
+                    }
+                  ],
+                  "user": {
+                    "username": "Lorem Ipsum",
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "id": 538,
+                    "email": "johndoe@example.com",
+                    "createdAt": "2021-03-23T16:13:08.489+01:00",
+                    "balance": 185
+                  },
+                  "total": 213,
+                  "createdAt": "Lorem Ipsum",
+                  "answer": 844,
+                  "tag": {
+                    "id": 724,
+                    "value": "Lorem Ipsum"
+                  },
+                  "isLiked": true
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createPostVoteValidator"
+              },
+              "example": {
+                "optionId": "Lorem Ipsum"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tags": {
+      "get": {
+        "summary": " (getAll)",
+        "description": "Returns **200** (OK) as **application/json**\n\n _app/controllers/admin/post_tags_controller.ts_ - **getAll**",
+        "parameters": [],
+        "tags": [
+          "TAGS"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PostTagInterface"
+                  }
+                },
+                "example": [
+                  {
+                    "id": 724,
+                    "value": "Lorem Ipsum"
+                  }
+                ]
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/posts/{postId}/like": {
+      "post": {
+        "summary": " (addReaction)",
+        "description": "\n\n _app/controllers/api/post_likes_controller.ts_ - **addReaction**",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "description": "Post to set reaction",
+            "schema": {
+              "example": "string",
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "POSTS"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostInterface"
+                },
+                "example": {
+                  "id": 336,
+                  "title": "Lorem Ipsum",
+                  "description": "Lorem ipsum dolor sit amet",
+                  "options": [
+                    {
+                      "option": "Lorem Ipsum",
+                      "id": 949,
+                      "total": 917
+                    }
+                  ],
+                  "user": {
+                    "username": "Lorem Ipsum",
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "id": 538,
+                    "email": "johndoe@example.com",
+                    "createdAt": "2021-03-23T16:13:08.489+01:00",
+                    "balance": 185
+                  },
+                  "total": 213,
+                  "createdAt": "Lorem Ipsum",
+                  "answer": 844,
+                  "tag": {
+                    "id": 724,
+                    "value": "Lorem Ipsum"
+                  },
+                  "isLiked": true
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createPostReactionValidator"
+              },
+              "example": {
+                "like": true
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": " (removeReaction)",
+        "description": "\n\n _app/controllers/api/post_likes_controller.ts_ - **removeReaction**",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "description": "Post to remove reaction",
+            "schema": {
+              "example": "string",
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "tags": [
+          "POSTS"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostInterface"
+                },
+                "example": {
+                  "id": 336,
+                  "title": "Lorem Ipsum",
+                  "description": "Lorem ipsum dolor sit amet",
+                  "options": [
+                    {
+                      "option": "Lorem Ipsum",
+                      "id": 949,
+                      "total": 917
+                    }
+                  ],
+                  "user": {
+                    "username": "Lorem Ipsum",
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "id": 538,
+                    "email": "johndoe@example.com",
+                    "createdAt": "2021-03-23T16:13:08.489+01:00",
+                    "balance": 185
+                  },
+                  "total": 213,
+                  "createdAt": "Lorem Ipsum",
+                  "answer": 844,
+                  "tag": {
+                    "id": 724,
+                    "value": "Lorem Ipsum"
+                  },
+                  "isLiked": true
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/posts/{postId}/comments": {
+      "get": {
+        "summary": " (getCommentsByPostId)",
+        "description": "Returns **200** (OK) as **application/json**\n\n _app/controllers/api/post_comments_controller.ts_ - **getCommentsByPostId**",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "description": "Post to leave a comment",
+            "schema": {
+              "example": "string",
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Pagination",
+            "schema": {
+              "example": "string",
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "tags": [
+          "POSTS"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentPaginatedInterface"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": 134,
+                      "postId": 206,
+                      "comment": "Lorem Ipsum",
+                      "createdAt": "Lorem Ipsum",
+                      "deletedAt": "Lorem Ipsum",
+                      "replyId": 775,
+                      "repliesAmount": 159
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "summary": " (leaveComment)",
+        "description": "\n\n _app/controllers/api/post_comments_controller.ts_ - **leaveComment**",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "description": "Post to leave a comment",
+            "schema": {
+              "example": "string",
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "POSTS"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentInterface"
+                },
+                "example": {
+                  "id": 134,
+                  "postId": 206,
+                  "user": {
+                    "username": "Lorem Ipsum",
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "id": 538,
+                    "email": "johndoe@example.com",
+                    "createdAt": "2021-03-23T16:13:08.489+01:00",
+                    "balance": 185
+                  },
+                  "comment": "Lorem Ipsum",
+                  "createdAt": "Lorem Ipsum",
+                  "deletedAt": "Lorem Ipsum",
+                  "replyId": 775,
+                  "repliesAmount": 159
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createPostCommentValidator"
+              },
+              "example": {
+                "comment": "Lorem Ipsum"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/posts/{postId}/comments/{commentId}": {
+      "delete": {
+        "summary": " (removeComment)",
+        "description": "\n\n _app/controllers/api/post_comments_controller.ts_ - **removeComment**",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "description": "Post to leave a comment",
+            "schema": {
+              "example": "string",
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "description": "Comment to delete",
+            "schema": {
+              "example": "string",
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "POSTS"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentInterface"
+                },
+                "example": {
+                  "id": 134,
+                  "postId": 206,
+                  "user": {
+                    "username": "Lorem Ipsum",
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "id": 538,
+                    "email": "johndoe@example.com",
+                    "createdAt": "2021-03-23T16:13:08.489+01:00",
+                    "balance": 185
+                  },
+                  "comment": "Lorem Ipsum",
+                  "createdAt": "Lorem Ipsum",
+                  "deletedAt": "Lorem Ipsum",
+                  "replyId": 775,
+                  "repliesAmount": 159
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "summary": " (replyComment)",
+        "description": "\n\n _app/controllers/api/post_comments_controller.ts_ - **replyComment**",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "description": "Post to leave a comment",
+            "schema": {
+              "example": "string",
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "description": "Comment to delete",
+            "schema": {
+              "example": "string",
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "POSTS"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentInterface"
+                },
+                "example": {
+                  "id": 134,
+                  "postId": 206,
+                  "user": {
+                    "username": "Lorem Ipsum",
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "id": 538,
+                    "email": "johndoe@example.com",
+                    "createdAt": "2021-03-23T16:13:08.489+01:00",
+                    "balance": 185
+                  },
+                  "comment": "Lorem Ipsum",
+                  "createdAt": "Lorem Ipsum",
+                  "deletedAt": "Lorem Ipsum",
+                  "replyId": 775,
+                  "repliesAmount": 159
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createPostCommentValidator"
+              },
+              "example": {
+                "comment": "Lorem Ipsum"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": " (getCommentReplies)",
+        "description": "Returns **200** (OK) as **application/json**\n\n _app/controllers/api/post_comments_controller.ts_ - **getCommentReplies**",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "description": "Post to leave a comment",
+            "schema": {
+              "example": "string",
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "description": "Comment to delete",
+            "schema": {
+              "example": "string",
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "POSTS"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommentInterface"
+                  }
+                },
+                "example": [
+                  {
+                    "id": 134,
+                    "postId": 206,
+                    "user": {
+                      "username": "Lorem Ipsum",
+                      "firstName": "John",
+                      "lastName": "Doe",
+                      "id": 538,
+                      "email": "johndoe@example.com",
+                      "createdAt": "2021-03-23T16:13:08.489+01:00",
+                      "balance": 185
+                    },
+                    "comment": "Lorem Ipsum",
+                    "createdAt": "Lorem Ipsum",
+                    "deletedAt": "Lorem Ipsum",
+                    "replyId": 775,
+                    "repliesAmount": 159
+                  }
+                ]
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "summary": " (login)",
+        "description": "\n\n _app/controllers/api/auth_controller.ts_ - **login**",
+        "parameters": [],
+        "tags": [
+          "AUTH"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResultInterface"
+                },
+                "example": {
+                  "user": {
+                    "username": "Lorem Ipsum",
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "id": 538,
+                    "email": "johndoe@example.com",
+                    "createdAt": "2021-03-23T16:13:08.489+01:00",
+                    "balance": 185
+                  },
+                  "token": "Lorem Ipsum"
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          }
+        },
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/loginValidator"
+              },
+              "example": {
+                "username": "Lorem Ipsum",
+                "password": "Lorem Ipsum"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "summary": " (register)",
+        "description": "\n\n _app/controllers/api/auth_controller.ts_ - **register**",
+        "parameters": [],
+        "tags": [
+          "AUTH"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResultInterface"
+                },
+                "example": {
+                  "user": {
+                    "username": "Lorem Ipsum",
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "id": 538,
+                    "email": "johndoe@example.com",
+                    "createdAt": "2021-03-23T16:13:08.489+01:00",
+                    "balance": 185
+                  },
+                  "token": "Lorem Ipsum"
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          }
+        },
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createAccountValidator"
+              },
+              "example": {
+                "username": "Lorem Ipsum",
+                "email": "Lorem Ipsum",
+                "password": "Lorem Ipsum"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/social": {
+      "post": {
+        "summary": " (social)",
+        "description": "\n\n _app/controllers/api/auth_controller.ts_ - **social**",
+        "parameters": [],
+        "tags": [
+          "AUTH"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {}
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "summary": " (logout)",
+        "description": "\n\n _app/controllers/api/auth_controller.ts_ - **logout**",
+        "parameters": [],
+        "tags": [
+          "AUTH"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/user": {
+      "get": {
+        "summary": " (get)",
+        "description": "Returns **200** (OK) as **application/json**\n\n _app/controllers/api/users_controller.ts_ - **get**",
+        "parameters": [],
+        "tags": [
+          "USER"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInterface"
+                },
+                "example": {
+                  "username": "Lorem Ipsum",
+                  "firstName": "John",
+                  "lastName": "Doe",
+                  "id": 538,
+                  "email": "johndoe@example.com",
+                  "createdAt": "2021-03-23T16:13:08.489+01:00",
+                  "balance": 185
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ]
+      },
+      "patch": {
+        "summary": " (edit)",
+        "description": "\n\n _app/controllers/api/users_controller.ts_ - **edit**",
+        "parameters": [],
+        "tags": [
+          "USER"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInterface"
+                },
+                "example": {
+                  "username": "Lorem Ipsum",
+                  "firstName": "John",
+                  "lastName": "Doe",
+                  "id": 538,
+                  "email": "johndoe@example.com",
+                  "createdAt": "2021-03-23T16:13:08.489+01:00",
+                  "balance": 185
+                }
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          },
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateUserValidator"
+              },
+              "example": {
+                "firstName": "Lorem Ipsum",
+                "lastName": "Lorem Ipsum",
+                "email": "Lorem Ipsum",
+                "username": "Lorem Ipsum"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": " (delete)",
+        "description": "\n\n _app/controllers/api/users_controller.ts_ - **delete**",
+        "parameters": [],
+        "tags": [
+          "USER"
+        ],
+        "responses": {
+          "401": {
+            "description": "Returns **401** (Unauthorized)"
+          },
+          "403": {
+            "description": "Returns **403** (Forbidden)"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": [
+              "access"
+            ]
+          }
+        ]
+      }
+    },
+    "/admin/tags": {
+      "post": {
+        "summary": " (create)",
+        "description": "\n\n _app/controllers/admin/post_tags_controller.ts_ - **create**",
+        "parameters": [],
+        "tags": [
+          "TAGS"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {}
+          }
+        }
+      },
+      "get": {
+        "summary": " (getAll)",
+        "description": "Returns **200** (OK) as **application/json**\n\n _app/controllers/admin/post_tags_controller.ts_ - **getAll**",
+        "parameters": [],
+        "tags": [
+          "TAGS"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PostTagInterface"
+                  }
+                },
+                "example": [
+                  {
+                    "id": 724,
+                    "value": "Lorem Ipsum"
+                  }
+                ]
+              }
+            },
+            "description": "Returns **200** (OK) as **application/json**"
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "POSTS",
+      "description": "Everything related to POSTS"
+    },
+    {
+      "name": "TAGS",
+      "description": "Everything related to TAGS"
+    },
+    {
+      "name": "AUTH",
+      "description": "Everything related to AUTH"
+    },
+    {
+      "name": "USER",
+      "description": "Everything related to USER"
+    }
+  ]
+}
